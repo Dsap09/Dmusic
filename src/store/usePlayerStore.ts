@@ -134,7 +134,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     play: () => {
         const { playerInstance } = get();
         if (playerInstance) {
-            // @ts-ignore - YouTube player methods
             playerInstance.internalPlayer?.playVideo();
         }
         set({ isPlaying: true });
@@ -143,7 +142,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     pause: () => {
         const { playerInstance } = get();
         if (playerInstance) {
-            // @ts-ignore - YouTube player methods
             playerInstance.internalPlayer?.pauseVideo();
         }
         set({ isPlaying: false });
@@ -165,7 +163,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     setVolume: (volume) => {
         const { playerInstance } = get();
         if (playerInstance) {
-            // @ts-ignore - YouTube player methods
             playerInstance.internalPlayer?.setVolume(volume);
         }
         set({ volume, isMuted: false });
@@ -174,7 +171,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     toggleMute: () => {
         const { isMuted, volume, playerInstance } = get();
         if (playerInstance) {
-            // @ts-ignore - YouTube player methods
             if (isMuted) {
                 playerInstance.internalPlayer?.setVolume(volume);
             } else {
@@ -189,7 +185,6 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     seekTo: (time) => {
         const { playerInstance } = get();
         if (playerInstance) {
-            // @ts-ignore - YouTube player methods
             playerInstance.internalPlayer?.seekTo(time, true);
         }
         set({ currentTime: time });

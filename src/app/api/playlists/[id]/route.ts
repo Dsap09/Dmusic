@@ -65,13 +65,20 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 }
 
+interface PlaylistUpdateData {
+    updated_at: string;
+    name?: string;
+    description?: string | null;
+    cover_image?: string | null;
+}
+
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     try {
         const playlistId = params.id;
         const body = await request.json();
         const { name, description, cover_image } = body;
 
-        const updateData: any = {
+        const updateData: PlaylistUpdateData = {
             updated_at: new Date().toISOString(),
         };
 

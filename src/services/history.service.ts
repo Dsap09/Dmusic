@@ -101,6 +101,24 @@ export async function getRecentHistory(limit: number = 50): Promise<{ success: b
 /**
  * Get top tracks by play count
  */
+interface RawHistoryEntry {
+    musicbrainz_id: string;
+    youtube_video_id: string;
+    title: string;
+    artist: string;
+    album?: string;
+    album_art?: string;
+    duration_played?: number;
+}
+
+interface RawArtistEntry {
+    artist: string;
+    duration_played?: number;
+}
+
+/**
+ * Get top tracks by play count
+ */
 export async function getTopTracks(
     limit: number = 10,
     timeRange: 'week' | 'month' | 'all' = 'all'
@@ -108,7 +126,7 @@ export async function getTopTracks(
     try {
         let query = supabase
             .from('listening_history')
-            .select('musicbrainz_id, youtube_video_id, title, artist, album, album_art');
+            .select('musicbrainz_id, youtube_video_id, title, artist, album, album_art, duration_played');
 
         // Apply time filter
         if (timeRange === 'week') {
@@ -128,7 +146,7 @@ export async function getTopTracks(
         // Group by track and count plays
         const trackMap = new Map<string, TopTrack>();
 
-        data?.forEach((entry: any) => {
+        (data as unknown as RawHistoryEntry[])?.forEach((entry) => {
             const existing = trackMap.get(entry.musicbrainz_id);
             if (existing) {
                 existing.play_count++;
@@ -195,7 +213,7 @@ export async function getTopArtists(
         // Group by artist and count plays
         const artistMap = new Map<string, TopArtist>();
 
-        data?.forEach((entry: any) => {
+        (data as unknown as RawArtistEntry[])?.forEach((entry) => {
             const existing = artistMap.get(entry.artist);
             if (existing) {
                 existing.play_count++;
@@ -253,7 +271,7 @@ export async function getTotalListeningTime(
 
         if (error) throw error;
 
-        const totalSeconds = data?.reduce((sum: number, entry: any) => sum + (entry.duration_played || 0), 0) || 0;
+        const totalSeconds = (data as unknown as { duration_played: number }[])?.reduce((sum, entry) => sum + (entry.duration_played || 0), 0) || 0;
 
         return {
             success: true,

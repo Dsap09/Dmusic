@@ -37,15 +37,18 @@ export function PlayerControls() {
     const [isFavorited, setIsFavorited] = useState(false);
     const [isCheckingFavorite, setIsCheckingFavorite] = useState(false);
 
-    // Check if current track is favorited
-    useEffect(() => {
+    const checkFavoriteStatus = async () => {
         if (currentTrack) {
             setIsCheckingFavorite(true);
-            isFavorite(currentTrack.musicbrainzId).then((favorited) => {
-                setIsFavorited(favorited);
-                setIsCheckingFavorite(false);
-            });
+            const favorited = await isFavorite(currentTrack.musicbrainzId);
+            setIsFavorited(favorited);
+            setIsCheckingFavorite(false);
         }
+    };
+
+    // Check if current track is favorited
+    useEffect(() => {
+        checkFavoriteStatus();
     }, [currentTrack]);
 
     // Format time in MM:SS

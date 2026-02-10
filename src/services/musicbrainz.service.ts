@@ -119,7 +119,7 @@ function buildSearchQuery(query: string): string {
   const isExplicitArtistSearch = hasExplicitArtistPrefix(trimmedQuery);
 
   // Remove explicit prefixes if present
-  let cleanQuery = trimmedQuery
+  const cleanQuery = trimmedQuery
     .replace(/^artist:\s*/i, '')
     .replace(/^by\s+/i, '')
     .replace(/^from\s+/i, '');

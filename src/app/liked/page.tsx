@@ -13,10 +13,6 @@ export default function LikedSongsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const { setQueue, play, currentTrack } = usePlayerStore();
 
-    useEffect(() => {
-        loadFavorites();
-    }, []);
-
     const loadFavorites = async () => {
         setIsLoading(true);
         const result = await getFavorites();
@@ -25,6 +21,10 @@ export default function LikedSongsPage() {
         }
         setIsLoading(false);
     };
+
+    useEffect(() => {
+        loadFavorites();
+    }, []);
 
     const handlePlay = async (favorite: Favorite, index: number = 0) => {
         const tracks = favorites.map(fav => ({

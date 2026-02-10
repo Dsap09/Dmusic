@@ -1,0 +1,94 @@
+
+> frontend@0.1.0 lint
+> eslint
+
+
+D:\laragon\www\Dmusic\src\app\api\music\youtube\route.ts
+  17:20  warning  'TrackMapping' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\Dmusic\src\app\liked\page.tsx
+   3:17  warning  'Clock' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+   3:24  warning  'TrendingUp' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   4:10  warning  'Card' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+   4:16  warning  'CardContent' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/no-unused-vars
+   4:29  warning  'CardHeader' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   4:41  warning  'CardTitle' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   9:10  warning  'getYoutubeId' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  26:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\laragon\www\Dmusic\src\app\liked\page.tsx:26:9
+  24 |
+  25 |     useEffect(() => {
+> 26 |         loadFavorites();
+     |         ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  27 |     }, []);
+  28 |
+  29 |     const handlePlay = async (favorite: Favorite, index: number = 0) => {  react-hooks/set-state-in-effect
+
+D:\laragon\www\Dmusic\src\components\music\KeyboardShortcutsHelp.tsx
+  4:20  warning  'X' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\Dmusic\src\components\music\LyricsPanel.tsx
+  40:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\laragon\www\Dmusic\src\components\music\LyricsPanel.tsx:40:13
+  38 |     useEffect(() => {
+  39 |         if (currentTrack && showLyrics) {
+> 40 |             fetchLyrics();
+     |             ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  41 |         }
+  42 |     }, [currentTrack?.musicbrainzId, showLyrics]);
+  43 |  react-hooks/set-state-in-effect
+  42:8   warning  React Hook useEffect has missing dependencies: 'currentTrack' and 'fetchLyrics'. Either include them or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/exhaustive-deps
+
+D:\laragon\www\Dmusic\src\components\music\PlayerControls.tsx
+  51:9  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\laragon\www\Dmusic\src\components\music\PlayerControls.tsx:51:9
+  49 |     // Check if current track is favorited
+  50 |     useEffect(() => {
+> 51 |         checkFavoriteStatus();
+     |         ^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  52 |     }, [currentTrack]);
+  53 |
+  54 |     // Format time in MM:SS  react-hooks/set-state-in-effect
+  52:8  warning  React Hook useEffect has a missing dependency: 'checkFavoriteStatus'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+
+D:\laragon\www\Dmusic\src\components\music\QueuePanel.tsx
+  124:35  warning  'isUpcoming' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\Dmusic\src\components\music\SearchBar.tsx
+  3:20  warning  'useCallback' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\Dmusic\src\components\music\YouTubePlayer.tsx
+   42:63  warning  'completed' is assigned a value but never used                                                                                            @typescript-eslint/no-unused-vars
+  131:8   warning  React Hook useEffect has a missing dependency: 'saveHistoryEntry'. Either include it or remove the dependency array                       react-hooks/exhaustive-deps
+  180:8   warning  React Hook useEffect has missing dependencies: 'currentTrack' and 'saveHistoryEntry'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\laragon\www\Dmusic\src\hooks\useKeyboardShortcuts.ts
+  20:9  warning  'shuffle' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\laragon\www\Dmusic\src\services\lyrics.service.ts
+  15:11  warning  'GeniusSearchResponse' is defined but never used  @typescript-eslint/no-unused-vars
+  98:38  warning  'query' is defined but never used                 @typescript-eslint/no-unused-vars
+
+✖ 22 problems (3 errors, 19 warnings)
+

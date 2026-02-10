@@ -13,12 +13,6 @@ export function LyricsPanel() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        if (currentTrack && showLyrics) {
-            fetchLyrics();
-        }
-    }, [currentTrack?.musicbrainzId, showLyrics]);
-
     const fetchLyrics = async () => {
         if (!currentTrack) return;
 
@@ -40,6 +34,12 @@ export function LyricsPanel() {
 
         setIsLoading(false);
     };
+
+    useEffect(() => {
+        if (currentTrack && showLyrics) {
+            fetchLyrics();
+        }
+    }, [currentTrack?.musicbrainzId, showLyrics]);
 
     if (!showLyrics) return null;
 
